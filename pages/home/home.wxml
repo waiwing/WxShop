@@ -1,15 +1,40 @@
-<view>
-   <image class="top-theme" src="{{ThemeA.entrance_img}}"></image>
-   <swiper class="swiper"
-           indicator-dots
-           indicator-color="#157658"
-           autoplay
-           circular
-   >
-      <block wx:for="{{BannerB.items}}">
-         <swiper-item >
-            <image class="swiper" src="{{item.img}}"></image>
-         </swiper-item>
-      </block>
-   </swiper>
-</view>
+<l-loadmore
+        show
+        end-text="加载完成"
+        type="{{loadType}}">
+    <view slot="content" class="container">
+        <!-- A位置 -->
+        <image class="top-theme" src="{{ThemeA.entrance_img}}"></image>
+
+        <!-- B位置 -->
+        <swiper class="swiper" indicator-dots indicator-color="#157658" autoplay circular>
+            <block wx:for="{{BannerB.items}}">
+                <swiper-item>
+                    <image class="swiper" src="{{item.img}}"></image>
+                </swiper-item>
+            </block>
+        </swiper>
+
+        <!-- C位置 -->
+        <s-category-grid grid="{{Grid}}"></s-category-grid>
+
+        <!-- D位置 -->
+        <image class="activity" src="{{Activity.entrance_img}}"></image>
+        <!-- E位置 -->
+        <s-spu-scroll wx:if="{{ThemeE.online}}"
+                      theme="{{ThemeE}}"
+                      spu-list="{{themeESpu}}"
+        ></s-spu-scroll>
+        <!-- F位置 -->
+        <image src="{{themeF.entrance_img}}" class="quantity"></image>
+        <!-- G位置 -->
+        <s-hot-list banner="{{bannerG}}"></s-hot-list>
+        <!-- H位置 -->
+        <image src="{{themeH.entrance_img}}" class="fashion"></image>
+
+        <view class="spu-bottom">
+            <image class="title-spu-bottom" src="/imgs/home/titleSpu.png"></image>
+            <l-water-flow generic:l-water-flow-item="s-spu-preview"></l-water-flow>
+        </view>
+    </view>
+</l-loadmore>

@@ -4,6 +4,9 @@ import {
 } from '../../config/config'
 import {Theme} from "../../model/theme";
 import {Banner} from "../../model/banner";
+import {Category} from "../../model/category";
+import {Activity} from "../../model/activity";
+import {SpuPaging} from "../../model/spu-paging";
 
 Page({
 
@@ -12,7 +15,11 @@ Page({
      */
     data: {
         ThemeA: null,
-        BannerB: null
+        BannerB: null,
+        Grid: [],
+        ThemeE: null,
+        Activity: null,
+        loadType: 'loading'
     },
 
     /**
@@ -20,6 +27,7 @@ Page({
      */
     onLoad: async function (options) {
         await this.IntAllData();
+        await this.initBottomSpuList();
     },
 
     /**
@@ -28,61 +36,61 @@ Page({
      * @constructor
      */
     async IntAllData() {
-        let themeA = await Theme.getLocationA();
-        let bannerB = await Banner.getLocationB();
+        const themeModel = new Theme();
+        await themeModel.getThemes();
+        const bannerB = await Banner.getLocationB();
+        const grid = await Category.getCategoryLocationC();
+        const activity = await Activity.getHoneLocaltionD();
+        const themeE = themeModel.getLocationE();
+        const themeF = themeModel.getLocationF();
+        const bannerG = await Banner.getLocationG();
+        const themeH = themeModel.getLocationH();
+
+
+        let themeESpu = [];
+        if (themeE.online) {
+            const data = await Theme.getHomeLocationESpu();
+            if (data) {
+                themeESpu = data.spu_list.slice(0, 8);
+            }
+        }
 
         this.setData({
-            ThemeA: themeA.data[0],
-            BannerB:bannerB.data
+            ThemeA: themeModel.getLocationA(),
+            BannerB: bannerB,
+            Grid: grid,
+            Activity: activity,
+            ThemeE: themeE,
+            themeESpu,
+            themeF,
+            bannerG,
+            themeH
         })
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
+    async initBottomSpuList() {
+        //获取分页组件对象
+        const spuPaging = SpuPaging.getLatestPaging();
+        this.data.spuPaging = spuPaging;
+        const data = await spuPaging.getMoreData();
+        if (!data)
+            return;
 
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
+        //累计，第二个参数炜清空
+        wx.lin.renderWaterFlow(data.items)
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+    onReachBottom: async function () {
+        const data = await this.data.spuPaging.getMoreData();
+        if (!data) {
+            this.setData({
+                loadType: 'end'
+            })
+            return;
+        }
+        wx.lin.renderWaterFlow(data.items)
     }
 })

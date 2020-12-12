@@ -3,7 +3,7 @@ const promisic = function (func) {
     return new Promise((resolve, reject) => {
       const args = Object.assign(params, {
         success: (res) => {
-          resolve(res);
+          resolve(res.data);
         },
         fail: (error) => {
           reject(error);

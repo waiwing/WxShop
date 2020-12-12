@@ -1,0 +1,22 @@
+{
+  "name": "wxshop",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "lin-ui": "^0.8.13"
+  },
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waiwing/WxShop.git"
+  },
+  "author": "waiwing",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/waiwing/WxShop/issues"
+  },
+  "homepage": "https://github.com/waiwing/WxShop#readme"
+}
