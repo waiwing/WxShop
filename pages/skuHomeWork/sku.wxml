@@ -1,0 +1,48 @@
+<wxs src="../../wxs/skuTemp.wxs" module="s"></wxs>
+<view class="container">
+    <!--    <view class="header-container">-->
+    <!--        <view class="left-img-container">-->
+    <!--            &lt;!&ndash;              <image src=""></image>&ndash;&gt;-->
+    <!--        </view>-->
+    <!--        <view class="right-content-container">-->
+    <!--            <text class="title"></text>-->
+    <!--            <view>price</view>-->
+    <!--            <text>库存</text>-->
+    <!--        </view>-->
+    <!--    </view>-->
+    <view class="sku-container">
+        <block wx:for="{{SpecificationList}}" wx:for-item="skuItem">
+            <view class="sku-item-container">
+                <view class="sku-key-title">{{skuItem.key_name}}</view>
+                <view class="value-list-wrapper">
+                    <block wx:for="{{skuItem.valueList}}" wx:for-item="valueItem">
+                        <view class="value-list-item">
+                            <l-button
+                                    shape="circle"
+                                    size="mini"
+                                    type="default"
+                                    bind:tap="skuItemClickHandler"
+                                    data-valid="{{valueItem.value_id}}"
+                                    data-keyId="{{skuItem.key_id}}"
+                                    disabled="{{s.skuBtnDisable(skuItem.key_id,valueItem.value_id,selectItemList,skuObj)}}"
+                                    plain="{{s.skuSelect(skuItem.key_id,valueItem.value_id,selectItemList)}}"
+
+                                    bg-color="{{s.skuBtnDisable(skuItem.key_id,valueItem.value_id,selectItemList,skuObj) ? 'lightgray' : '' }}"
+                                    data-disable="{{s.skuBtnDisable(skuItem.key_id,valueItem.value_id,selectItemList,skuObj)}}"
+                            >
+                                    {{valueItem.value_name}}</l-button>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>
+
+<l-button  l-class="disable"	   type="default"   disabled="{{true}}"  > 123</l-button>
+<l-button     type="default"   disabled="{{false}}" > 12333</l-button>
+<l-button     type="default"   > 12333</l-button>
+
+<l-button   bg-color="lightgray"   plain="true"    disabled="{{true}}"  > 123</l-button>
+<l-button     plain="true"    disabled="{{false}}" > 12333</l-button>
+<l-button     plain="true"    > 12333</l-button>

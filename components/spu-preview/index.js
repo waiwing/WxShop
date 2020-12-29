@@ -12,14 +12,14 @@ Component({
      */
     data: {
         //标签
-        tags:[]
+        tags: []
     },
 
     observers: {
         data: function (data) {
             if (!data)
                 return;
-            if(!data.tags)
+            if (!data.tags)
                 return;
             const tags = data.tags.split('$');
 
@@ -30,5 +30,13 @@ Component({
     /**
      * 组件的方法列表
      */
-    methods: {}
+    methods: {
+        onItemClickHandler(event) {
+            
+            const pid = event.currentTarget.dataset.pid;
+             wx.navigateTo({
+                url:`/pages/detail/detail?pid=${pid}`
+            })
+        }
+    }
 })

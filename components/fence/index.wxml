@@ -1,0 +1,9 @@
+<view class="container">
+    <text class="title">{{fance.title}}</text>
+    <view class="row-container">
+        <block wx:for="{{fance.CellList}}" wx:key="index">
+            <s-cell  rowIndex="{{rowIndex}}" colIndex="{{index}}" bind:celltap="onCellTap" class="cell" cell="{{item}}"></s-cell>
+        </block>
+        <view class="hr"></view>
+    </view>
+</view>

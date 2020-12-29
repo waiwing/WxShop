@@ -32,7 +32,7 @@
         <!-- H位置 -->
         <image src="{{themeH.entrance_img}}" class="fashion"></image>
 
-        <view class="spu-bottom">
+        <view class="spu-bottom" bind:tap="spuClickHandler">
             <image class="title-spu-bottom" src="/imgs/home/titleSpu.png"></image>
             <l-water-flow generic:l-water-flow-item="s-spu-preview"></l-water-flow>
         </view>

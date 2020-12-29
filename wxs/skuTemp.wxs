@@ -1,0 +1,80 @@
+/**
+ * 主价格
+ */
+function skuBtnDisable(key_id, value_id, selectItemList, skuObj) {
+    //在已选列表中炜false
+    // console.log(selectItemList)
+
+    var index = 0;
+    for (; index < selectItemList.length; index++) {
+        var item = selectItemList[index];
+        if (item.value_id === value_id && item.key_id === key_id)
+            return false;
+    }
+
+     if (selectItemList.length == 0)
+        return false;
+
+    var skuList = [];
+    var selectIndex = 0;
+    for (selectIndex = 0; selectIndex < selectItemList.length; selectIndex++) {
+        var selectItem = selectItemList[selectIndex];
+
+        var skuIndex = 0;
+        for (; skuIndex < skuObj.sku_list.length; skuIndex++) {
+            var skuItem = skuObj.sku_list[skuIndex];
+            var specsIndex = 0;
+            var hasFind = false;
+            for (; specsIndex < skuItem.specs.length; specsIndex++) {
+                var valueItem = skuItem.specs[specsIndex];
+                if (valueItem.key_id == selectItem.key_id && valueItem.value_id == selectItem.value_id) {
+                    hasFind = true;
+                }
+            }
+            if (hasFind) {
+                skuList.push(skuItem);
+            }
+        }
+    }
+    if(key_id == 3 && value_id == 11){
+        console.log(skuList.length);
+    }
+
+    skuIndex = 0;
+    hasFind = false;
+
+    for (; skuIndex < skuList.length; skuIndex++) {
+        var skuItem = skuList[skuIndex];
+        specsIndex = 0;
+        for (; specsIndex < skuItem.specs.length; specsIndex++) {
+            var valueItem = skuItem.specs[specsIndex];
+            if (valueItem.key_id == key_id && valueItem.value_id == value_id) {
+                hasFind = true;
+                break;
+            }
+        }
+
+    }
+    if (hasFind) {
+        return false;
+    }else{
+        return true;
+    }
+
+    return false;
+}
+
+function skuSelect(key_id, value_id, selectItemList){
+    var index = 0;
+    for (; index < selectItemList.length; index++) {
+        var item = selectItemList[index];
+        if (item.value_id === value_id && item.key_id === key_id)
+            return false;
+    }
+    return true;
+}
+
+module.exports = {
+    skuBtnDisable: skuBtnDisable,
+    skuSelect:skuSelect
+}

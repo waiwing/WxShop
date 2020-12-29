@@ -1,5 +1,5 @@
 <wxs src="../../wxs/price.wxs" module="p"></wxs>
-<view class="container">
+<view bind:tap="onItemClickHandler" data-pid="{{data.id}}" class="container">
     <image class="img" model="widthFix" src="{{data.img}}"></image>
 
     <view class="content-container">

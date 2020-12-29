@@ -1,0 +1,33 @@
+.container{
+
+}
+
+.sku-container{
+
+}
+
+.sku-item-container{
+    display:flex;
+    flex-direction:column;
+}
+
+.sku-key-title{
+    margin-left: 10rpx;
+    font-size: 28rpx;
+}
+
+.value-list-wrapper{
+    display:flex;
+    flex-direction:row;
+}
+
+.value-list-item{
+    margin-left: 10rpx;
+}
+
+.disable{
+    color: lightgray;
+    background-color: lightgray;
+    border:1rpx dashed lightgray;
+
+}
